@@ -1,0 +1,68 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:DbDemo.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="750" d:DesignHeight="500"
+        x:Class="DbDemo.MainWindow"
+        x:CompileBindings="False"
+        Width="750" Height="500"
+        Title="DbDemo">
+
+    <Window.DataContext>
+		<vm:MainViewModel/>
+    </Window.DataContext>
+
+    <StackPanel Margin="15" Spacing="10">
+		<TextBlock Text="MVVM + SQLite"
+                   FontSize="22" FontWeight="Bold"/>
+        <TextBox Text="{Binding Name}"
+                 Watermark="Введите имя"/>
+        <TextBox Text="{Binding Email}"
+                 Watermark="Введите почту"/>
+        <WrapPanel>
+			<Button Content="Загрузить"
+                    Command="{Binding LoadUsersCommand}"
+                    Margin="0,0,10,0"/>
+                    
+            <Button Content="Добавить"
+                    Command="{Binding AddUserCommand}"
+                    Margin="0,0,10,0"/>
+                   
+            <Button Content="Удалить"
+                    Command="{Binding DeleteUserCommand}"
+                    Margin="0,0,10,0"/>
+                   
+        </WrapPanel>
+
+        <TextBlock Text="Поиск" FontWeight="SemiBold"/>
+        <WrapPanel>
+            <TextBox Text="{Binding SearchText}"
+                     Watermark="Введите имя/почту для поиска"
+                     Width="250"
+                     Margin="0,0,10,0"/>
+             
+            <Button Content="Найти"
+                    Command="{Binding SearchUsersCommand}"
+                    Margin="0,0,10,0"/>
+            <Button Content="Сбросить поиск"
+                    Command="{Binding ClearSearchCommand}"/>
+            <Button Content="Очистить поля"
+                    Command="{Binding ClearInputCommand}"/>
+        </WrapPanel>
+        <TextBlock Text="{Binding Info}"
+                   FontWeight="SemiBold"/>
+        <DataGrid ItemsSource="{Binding Users}"
+                  AutoGenerateColumns="True"
+                  SelectedItem="{Binding SelectedUser}"
+                  IsReadOnly="True" Height="250"/>
+         <DataGrid ItemsSource="{Binding Users}"
+                  AutoGenerateColumns="True"
+                  SelectedItem="{Binding AllUsers}"
+                  IsReadOnly="True" Height="250"/>
+        <TextBox Text="{Binding Id}"
+                 Watermark="Введите Id"
+                 FontWeight="SemiBold"/>
+    </StackPanel>
+    
+</Window>
